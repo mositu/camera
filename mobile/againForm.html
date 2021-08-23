@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chorme=1">
+    <title>三水区企业口罩申购系统</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+
+    <link rel="stylesheet" href="../assets/mobile/layui/css/layui.css">
+    <link rel="stylesheet" href="../assets/mobile/layui/css/layui.mobile.css">
+    <!--顺便引入jquery在线文件-->
+    <script src="../assets/mobile/jquery.min.js"></script>
+    <script src="../assets/mobile/layui/layui.js"></script>
+    <style>
+        /* reset */
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        p,
+        dl,
+        dd,
+        ul,
+        ol,
+        form,
+        input,
+        textarea,
+        th,
+        td,
+        select {
+            margin: 0;
+            padding: 0;
+        }
+
+        em {
+            font-style: normal;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a:focus {
+            outline: none;
+        }
+
+        img {
+            border: none;
+            vertical-align: top;
+            max-width: 100%;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        input,
+        textarea {
+            outline: none;
+            background: none;
+            border: none;
+        }
+
+        textarea {
+            resize: none;
+            overflow: auto;
+        }
+
+        body {
+            padding: 0 15px;
+            padding-top: 36%;
+            background: url('../assets/mobile/suppliesapply/bg.jpg') center top no-repeat #fff;
+            background-size: 100% auto;
+            font-size: 16px;
+            font-family: "微软雅黑";
+            position: relative;
+            -webkit-text-size-adjust: none;
+            box-sizing: border-box;
+        }
+
+        /* end reset */
+
+        .clear {
+            zoom: 1;
+        }
+
+        .clear:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .fl {
+            float: left;
+            _display: inline;
+        }
+
+        .fr {
+            float: right;
+            _display: inline;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .clearfix:before,
+        .clearfix:after {
+            content: '\0020';
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .main-box {
+            position: relative;
+            max-width: 780px;
+            width: 100%;
+            margin: auto;
+            *zoom: 1;
+            padding: 0 15px;
+            box-sizing: border-box;
+            background-color: #fff;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .main-box:before,
+        .main-box:after {
+            content: '\0020';
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .main-box .layui-form-label {
+            text-align: left;
+            font-size: 16px;
+            padding-left: 0;
+            float: none;
+            width: auto;
+        }
+
+        .main-box .span {
+            color: red
+        }
+
+        .layui-input:hover,
+        .layui-textarea:hover {
+            border-color: #0d70fb !important
+        }
+
+        .w66 {
+            width: 66.6%;
+            display: inline-block;
+        }
+
+        .w50 {
+            width: 50%
+        }
+
+        .w768 {
+            width: 76.8%;
+            display: inline-block;
+        }
+
+        .w90 {
+            width: 90%;
+        }
+
+        .mid-line {
+            width: 98%;
+            height: 2px;
+            background: #eaeaea;
+            margin: 30px auto 10px;
+        }
+
+        .dw {
+            display: inline;
+            color: #181818;
+            font-size: 16px;
+            margin-left: 5px
+        }
+
+        .getNum {
+            width: 30%;
+            margin-left: 1%;
+            display: inline-block;
+            background-color: #219ddd;
+            color: #fff;
+            text-align: center;
+            height: 36px;
+            line-height: 36px;
+            border: none;
+        }
+
+        .layui-form-select dl dd.layui-this {
+            background-color: #0d70fb;
+        }
+
+        body .layui-laydate .layui-this {
+            background-color: #0d70fb !important;
+        }
+
+        .layui-laydate-footer span:hover,
+        .layui-laydate-header i:hover,
+        .layui-laydate-header span:hover {
+            color: #0d70fb !important;
+        }
+
+        @media screen and (min-width:780px) {
+            body {
+                width: 780px;
+                margin: auto;
+                background-size: 780px auto;
+                padding-top: 276px;
+            }
+        }
+
+        placeholder:-moz-placeholder {
+            /* Mozilla Firefox 4 to 18 */
+            color: #bbbbbb;
+            opacity: 1;
+            font-size: 14px;
+        }
+
+        ::-moz-placeholder {
+            /* Mozilla Firefox 19+ */
+            color: #bbbbbb;
+            opacity: 1;
+            font-size: 14px;
+        }
+
+        textarea:-ms-input-placeholder,
+        input:-ms-input-placeholder {
+            color: #bbbbbb;
+            opacity: 1;
+            font-size: 14px;
+        }
+
+        textarea:-ms-input-placeholder,
+        input::-webkit-input-placeholder {
+            color: #bbbbbb;
+            opacity: 1;
+            font-size: 14px;
+        }
+
+        .blue input {
+            color: #0e71fa;
+        }
+
+        /* .layui-btn-normal {
+            margin-bottom: 5px;
+        } */
+
+        .border-line {
+            text-align: center;
+            line-height: 16px;
+            font-size: 16px;
+            font-weight: bolder;
+        }
+
+        .uploadBtn {
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+            background-color: white;
+            border: 1px solid #eee;
+            color: gray;
+            font-size: 20px;
+        }
+
+        .layui-icon .layui-icon-addition {
+            font-size: 20px;
+        }
+
+        .eidtBtn {
+            width: 80%;
+            padding: 0;
+            display: inline-block;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <p style="position: relative;font-size:16px;color: white;line-height:2.5;">
+        &#60 后退 <a
+            style="position: absolute;right: 0; top:6px; padding:0 6px;border-radius: 6px; text-align: center;color: #16319c; background: #e0e0e0;  line-height: 28px;"
+            href="javascript:void();" onclick="logout();">核酸核查</a>
+    </p>
+    <div class="main-box">
+        <form class="layui-form">
+            <div class="layui-form-item blue" style="display: flex;">
+                <div class="layui-form-item blue">
+                    <label class="layui-form-label">序号</label>
+                    <div class="w90">
+                        <input type="text" readonly name="Serial number" lay-verify="Serial number" id="Serial number"
+                            value="" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item blue">
+                    <label class="layui-form-label">姓名</label>
+                    <div class="w90">
+                        <input type="text" readonly name="name" lay-verify="name" id="name" value="" placeholder=""
+                            autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item blue">
+                <label class="layui-form-label">联系电话</label>
+                <div>
+                    <input type="text" readonly name="phone" id="phone" lay-verify="phone" value="" placeholder=""
+                        autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item blue">
+                <label class="layui-form-label">身份证</label>
+                <div class="layui-row" style="display: flex;">
+                    <div class="w768">
+                        <input type="text" readonly name="idCard" id="idCard" lay-verify="idCard" value=""
+                            placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                    <div style="width: 23.2%;">
+                        <button class="layui-btn layui-btn-normal eidtBtn">修 改</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item blue">
+                <label class="layui-form-label">现时住址</label>
+                <div>
+                    <textarea placeholder="" name="address" id="address" lay-verify="address"
+                        class="layui-textarea"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item blue">
+                <label class="layui-form-label">核处情况</label>
+                <div>
+                    <textarea placeholder="" name="status" id="status" lay-verify="status"
+                        class="layui-textarea"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item blue">
+                <label class="layui-form-label">最新核算检测时间</label>
+                <div>
+                    <input type="text" readonly name="newTestTime" id="newTestTime" lay-verify="newTestTime" value=""
+                        placeholder="" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item blue">
+                <label class="layui-form-label">检测结果</label>
+                <div>
+                    <input type="text" readonly name="testResult" id="testResult" lay-verify="testResult" value=""
+                        placeholder="" autocomplete="off" class="layui-input">
+                    </select>
+                </div>
+            </div>
+
+            <div class="border-line">······</div>
+            <!--  <div class="layui-form-item">
+	       <label class="layui-form-label">口罩单价</label>
+	       <div class="w66">
+	           <input type="text" readonly name="maskPrice" id="maskPrice" lay-verify="maskPrice" value="" placeholder="" autocomplete="off" class="layui-input">
+	       </div>
+	       <div class="dw">元</div>
+	   </div> -->
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">备注</label>
+                <div>
+                    <textarea placeholder="申购数量理由、计算方式，意见建议等(非必填项)" name="remark" id="remark" lay-verify="remark"
+                        class="layui-textarea"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label span"> 当事人的健康码、行程码</label>
+                <div class="layui-row" style="display: flex;">
+                    <!-- <div>
+                        <button type="button" class="layui-btn uploadBtn" id="test1">
+                            <i class="layui-icon layui-icon-addition"></i>
+                        </button>
+                    </div>
+                    <div style="margin-left:20px ;">
+                        <button type="button" class="layui-btn uploadBtn" id="test1">
+                            <i class="layui-icon layui-icon-addition"></i>
+                        </button>
+                    </div> -->
+                    <input type="file" id="file" accept="image/*">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <div style="text-align: center">
+                    <button style="background:#54c821;width:150px;margin:20px 0" type="submit" class="layui-btn"
+                        lay-submit="" lay-filter="submit">核查完成</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <script src="../assets/mobile/area.js"></script>
+    <script>
+        var file = document.querySelector('#file');
+        if (getIos()) {
+            file.removeAttribute("capture");
+        }
+        function getIos() {
+            var ua = navigator.userAgent.toLowerCase();
+            if (ua.match(/iPhone\sOS/i) == "iphone os") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        layui.use('upload', function () {
+            var upload = layui.upload;
+
+            //执行实例
+            var uploadInst = upload.render({
+                elem: '#test1' //绑定元素
+                , url: '/upload/' //上传接口
+                , done: function (res) {
+                    //上传完毕回调
+                }
+                , error: function () {
+                    //请求异常回调
+                }
+            });
+        });
+        // var api='http://192.168.11.42:8811'
+        var api = ''
+
+
+        function getInfo() {
+            $.ajax({
+                type: "POST",                             //请求的类型
+                url: api + "/getUserInfoBySession",                  //请求的路径
+                data: {},                    //请求的参数
+                success: function (result) {                 //成功返回触发的方法  
+                    if (result.code == 200) {
+                        var data = result.data
+                        $("#cCode").val(data.cCode)
+                        $("#address").val(data.address)
+                        $("#cType").val(data.cType)
+                        $("#userName").val(data.userName)
+                        $("#contactTel").val(data.contactTel)
+                        $("#cName").val(data.cName)
+                        $("#contactTel").val(data.contactTel)
+                        $("#deptId").val(data.deptName)
+                        $("#contact").val(data.contact)
+                        $("#resumeDate").val(data.resumeDate)
+                        $("#beforePersonnel").val(data.beforePersonnel)
+                    } else {
+                        layer.alert(result.msg);
+                    }
+                },
+                //请求失败触发的方法
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("ajax请求失败");
+                    console.log("请求对象XMLHttpRequest: " + XMLHttpRequest);
+                    console.log("错误类型textStatus: " + textStatus);
+                    console.log("异常对象errorThrown: " + errorThrown);
+                }
+            })
+        }
+
+        function RndNum(n) {
+            var rnd = "";
+            for (var i = 0; i < n; i++)
+                rnd += Math.floor(Math.random() * 10);
+            return rnd;
+        }
+
+        $("#sendCodeBtn").click(function () {
+            var a = RndNum(5);
+            var str = api + '/anon/getVerifyCodeImg?r=' + a;
+            $(this).attr("src", str)
+        })
+
+        layui.use(['form', 'table', 'laydate'], function () {
+            var form = layui.form
+            var table = layui.table;
+            //日期 
+
+            //监听提交
+            form.on('submit(submit)', function (data) {
+                var formdata = data.field
+                var submitData = {}
+                submitData.resumeCount = formdata.resumeCount  //目前复工人数
+                submitData.resumeMasks = formdata.resumeMasks  //申购口罩个数
+                submitData.remark = formdata.remark  //备注
+                submitData.pvCode = formdata.smsCode  // 短信验证码 
+                console.log(submitData)
+                submitData = JSON.stringify(submitData)
+                var formData = new FormData();
+                formData.append('data', submitData);
+                $.ajax({
+                    type: "POST",                             //请求的类型
+                    url: api + "/api/dsuppliesapply/again_save",                  //请求的路径
+                    data: formData,                    //请求的参数
+                    async: false,
+                    cache: false,
+                    // headers: { 
+                    //    "X-Requested-With": "XMLHttpRequest"
+                    // },
+                    contentType: false,
+                    processData: false,
+                    success: function (result) {                 //成功返回触发的方法 
+                        if (result.code == 200) {
+                            location = '/api/open/dsuppliesapply/success';
+                        } else {
+                            layer.alert(result.msg);
+                        }
+
+                    },
+                    //请求失败触发的方法
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log("ajax请求失败");
+                        console.log("请求对象XMLHttpRequest: " + XMLHttpRequest);
+                        console.log("错误类型textStatus: " + textStatus);
+                        console.log("异常对象errorThrown: " + errorThrown);
+                    }
+                })
+                return false;
+            });
+
+            //自定义验证规则
+            form.verify({
+                resumeCount: function (value) {
+                    if (value == '') {
+                        return '请填写复工人数';
+                    }
+                    if (!/^\d+$/.test(value)) {
+                        return '请填写正确的复工人数'
+                    };
+                },
+                resumeMasks: function (value) {
+                    if (value == '') {
+                        return '请填写申购口罩数量';
+                    }
+                    if (!/^\d+$/.test(value)) {
+                        return '请填写正确的申购口罩数量'
+                    };
+                }
+            });
+
+
+
+            getInfo();
+        })
+
+        function logout() {
+            location = '/logout3';
+        }
+    </script>
+</body>
+
+</html>

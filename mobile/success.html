@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chorme=1">
+    <title>三水区企业口罩申购系统</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">  
+   
+    <link rel="stylesheet" href="../assets/mobile/layui/css/layui.css">
+    <link rel="stylesheet" href="../assets/mobile/layui/css/layui.mobile.css">
+    <!--顺便引入jquery在线文件-->
+    <script src="../assets/mobile/jquery.min.js"></script> 
+     <script src="../assets/mobile/layui/layui.js"></script>
+ 
+<style>
+    /* reset */
+html,body,h1,h2,h3,h4,h5,p,dl,dd,ul,ol,form,input,textarea,th,td,select { margin:0; padding:0; }
+em { font-style:normal; }
+li { list-style:none; }
+a { text-decoration:none; color: inherit;}
+a:focus { outline: none; } 
+img { border:none; vertical-align:top; max-width: 100%; }
+table { border-collapse:collapse; }
+input,textarea { outline:none; background: none; border: none; }
+textarea { resize:none; overflow:auto; }
+body { padding:0 15px;background-color: #fff; font-size:12px; font-family:"微软雅黑"; position: relative;  -webkit-text-size-adjust: none;}
+/* end reset */
+
+.clear { zoom:1; }
+.clear:after { content:''; display:block; clear:both; }
+.fl { float:left; _display: inline;}
+.fr { float:right; _display: inline;}
+.clearfix {*zoom: 1;}
+.clearfix:before, .clearfix:after {content: '\0020';display: block;height: 0;clear: both;visibility: hidden;}
+
+.main-box {position: relative;max-width: 1200px; width: 100%; margin: auto; *zoom: 1;}
+.main-box:before, .main-box:after {content: '\0020';display: block;height: 0;clear: both;visibility: hidden;}
+
+
+body,html{height:100%;position: relative;}
+ 
+
+</style>
+</head>
+<body>
+   
+        <div style="position:absolute;top:0;bottom:0;left:0;right:0; height:230px; text-align: center;margin:auto;">
+         <img src="../assets/mobile/success.png"  alt="">
+           <p style="font-size:22px">提交成功</p>
+            <p style="font-size:16px;margin-top: 10px;">3秒后将自动跳转</p>
+        </div>
+    
+ 
+    <script language="JavaScript">
+        setTimeout(function() {
+            var type = '${type!}';
+            if(type == 'list') {
+                location = '/api/dsuppliesapply/list';
+            } else {
+                location = '/api/open/dsuppliesapply/';
+            }
+        }, 3000)
+        console.log(111);
+    </script>
+</body>
+
+</html>

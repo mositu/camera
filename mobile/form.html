@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chorme=1">
+    <title>三水区企业口罩申购系统</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+
+    <link rel="stylesheet" href="../assets/mobile/layui/css/layui.css">
+    <link rel="stylesheet" href="../assets/mobile/layui/css/layui.mobile.css">
+    <!--顺便引入jquery在线文件-->
+    <script src="../assets/mobile/jquery.min.js"></script>
+    <script src="../assets/mobile/layui/layui.js"></script> 
+<style>
+    /* reset */
+html,body,h1,h2,h3,h4,h5,p,dl,dd,ul,ol,form,input,textarea,th,td,select { margin:0; padding:0; }
+em { font-style:normal; }
+li { list-style:none; }
+a { text-decoration:none; color: inherit;}
+a:focus { outline: none; } 
+img { border:none; vertical-align:top; max-width: 100%; }
+table { border-collapse:collapse; }
+input,textarea { outline:none; background: none; border: none; }
+textarea { resize:none; overflow:auto; }
+body { padding:0 15px; padding-top: 36%; background: url('../assets/mobile/suppliesapply/bg.jpg') center top no-repeat #fff; background-size: 100% auto; font-size:16px; font-family:"微软雅黑"; position: relative;  -webkit-text-size-adjust: none; box-sizing: border-box;}
+/* end reset */
+
+.clear { zoom:1; }
+.clear:after { content:''; display:block; clear:both; }
+.fl { float:left; _display: inline;}
+.fr { float:right; _display: inline;}
+.clearfix {*zoom: 1;}
+.clearfix:before, .clearfix:after {content: '\0020';display: block;height: 0;clear: both;visibility: hidden;}
+
+.main-box {position: relative;max-width: 780px; width: 100%; margin: auto; *zoom: 1; padding: 0 15px; box-sizing: border-box; background-color: #fff; border-radius: 10px 10px 0 0;}
+.main-box:before, .main-box:after {content: '\0020';display: block;height: 0;clear: both;visibility: hidden;}
+
+.main-box .layui-form-label{text-align: left;font-size: 16px;padding-left: 0;float: none;width:auto;}
+.main-box span{color: red}
+.layui-input:hover,
+.layui-textarea:hover {
+ border-color:#0d70fb!important
+} 
+.w66{width: 66.6%;display: inline-block;}
+.w50{width: 50%}
+.mid-line{width: 98%;height: 2px;background: #eaeaea;margin:30px auto 10px;}
+.dw{display: inline;color: #181818;font-size: 16px;margin-left: 5px}
+.getNum{width: 30%;margin-left: 1%;display: inline-block;background-color: #219ddd;color: #fff;text-align: center;height: 36px;line-height: 36px;border:none;}
+.layui-form-select dl dd.layui-this{background-color: #0d70fb;}
+body .layui-laydate .layui-this{background-color: #0d70fb!important;}
+.layui-laydate-footer span:hover,.layui-laydate-header i:hover, .layui-laydate-header span:hover{color:#0d70fb!important;}
+
+placeholder
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #bbbbbb; opacity:1; 
+	font-size: 14px;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #bbbbbb;opacity:1;
+	font-size: 14px;
+}
+
+textarea:-ms-input-placeholder,input:-ms-input-placeholder{
+    color: #bbbbbb;opacity:1;
+	font-size: 14px;
+}
+
+textarea:-ms-input-placeholder,input::-webkit-input-placeholder{
+    color: #bbbbbb;opacity:1;
+	font-size: 14px;
+} 
+
+@media screen and (min-width:780px) {
+  body{width:780px;margin:auto;background-size: 780px auto;padding-top:276px;} 
+}
+
+@media screen and (max-width:450px) {
+   .hj .layui-input-inline{width:140px !important;margin:0;display: inline-block;}
+   #isreach{top:4px;}
+}
+#allForm{display: none;}
+</style>
+</head>
+<body>
+   <div class="main-box">
+	  <p style="font-size:16px;border-bottom: 1px solid #dedede;color: #0067f1;line-height:2.5;">首次申购</p>
+      <p style="padding-top: 15px; font-size: 16px;margin-bottom: 15px">提示：带<span>*</span>号为必填项</p>
+      <form class="layui-form">
+       <div class="layui-form-item">
+           <label class="layui-form-label"><span>*</span> 企业统一信用代码</label>
+           <div>
+               <input type="text" name="cCode" lay-verify="cCode" id="cCode" value="" placeholder="请输入18位代码" autocomplete="off" class="layui-input">
+           </div>
+       </div>
+       <div class="layui-form-item">
+           <label class="layui-form-label">企业名称</label>
+           <div>
+               <input readonly type="text"  name="cName" id="cName" lay-verify="cName" value="" placeholder="请输入企业规范全称" autocomplete="off" class="layui-input">
+           </div>
+       </div>
+ 
+<div id="allForm">
+       <div class="layui-form-item hj">
+           <label class="layui-form-label"><span>*</span> 企业所属镇街</label>
+           <div>
+             <select id="deptId"  name="deptId" class="deptid-selector" lay-filter="deptId"  lay-verify="deptId" >
+               
+             </select>
+           </div> 
+       </div>
+
+       <div class="layui-form-item hj">
+           <label class="layui-form-label"><span>*</span> 企业地址</label>
+            <div>
+               <input type="text" name="address" id="address" lay-verify="address" value="" placeholder="具体道路名及门牌号" autocomplete="off" class="layui-input">
+           </div>
+       </div>
+
+       <div class="layui-form-item">
+           <label class="layui-form-label"><span>*</span> 企业类型</label>
+           <div>
+               <select name="cType" lay-verify="cType" lay-filter="cType"> 
+               <option value="">请选择企业类型</option>
+               <option value="生产制造业">生产制造业</option>
+               <option value="房产建筑业">房产建筑业</option>
+               <option value="物流运输业">物流运输业</option> 
+			   <option value="批发零售业">批发零售业</option> 
+			   <option value="餐饮住宿业">餐饮住宿业</option> 
+			   <option value="文化旅游业">文化旅游业</option> 
+               <option value="其他行业">其他行业</option>   
+             </select>
+           </div> 
+       </div>  
+
+       <div class="mid-line"></div>
+
+       <div class="layui-form-item">
+           <label class="layui-form-label"><span>*</span> 企业节前员工总人数</label>
+           <div  class="w66">
+               <input type="text" name="beforePersonnel" id="beforePersonnel" lay-verify="beforePersonnel" value="" placeholder="以购买社保人数为准" autocomplete="off" class="layui-input">
+           </div>
+           <div class="dw">人</div>
+       </div>
+
+       <div class="layui-form-item">
+           <label class="layui-form-label"><span>*</span> 复工人数</label>
+           <div class="w66">
+               <input type="text" name="resumeCount" id="resumeCount" lay-verify="resumeCount" value="" placeholder="" autocomplete="off" class="layui-input">
+           </div>
+           <div class="dw">人</div>
+       </div>
+
+       <div class="layui-form-item">
+           <label class="layui-form-label"><span>*</span> 申购口罩数量(7天总量)</label>
+           <div  class="w66">
+               <input type="text" name="resumeMasks" id="resumeMasks" lay-verify="resumeMasks" value="" placeholder="" autocomplete="off" class="layui-input">
+           </div>
+           <div class="dw">只</div>
+       </div>
+
+      <div class="layui-form-item">
+         <label class="layui-form-label"><span>*</span> 复工时间</label>
+          <div  class="w66">
+          <input type="text" readonly name="resumeDate" id="resumeDate" lay-verify="resumeDate" placeholder="计划复工或已复工时间" autocomplete="off" class="layui-input">
+          </div>   
+      </div>
+
+      <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">备注</label>
+        <div>
+         <textarea placeholder="申购数量理由、计算方式，意见建议等(非必填项)" name="remark" id="remark" lay-verify="remark" class="layui-textarea"></textarea>
+       </div>
+      </div>
+
+      <div class="layui-form-item">
+          <label class="layui-form-label"><span>*</span> 登录密码</label>
+          <div class="w66">
+              <input type="password" name="upass" id="upass" lay-verify="upass" value="" placeholder="字母+数字,8位或以上" autocomplete="off" class="layui-input">
+          </div>
+      </div>
+      
+      <div class="layui-form-item">
+          <label class="layui-form-label"><span>*</span> 确认密码</label>
+          <div class="w66">
+              <input type="password" name="upass2" id="upass2" lay-verify="upass2" value="" placeholder="" autocomplete="off" class="layui-input">
+          </div>
+      </div>
+      
+      <div class="layui-form-item">
+          <label class="layui-form-label"><span>*</span> 申购联系人</label>
+          <div  class="w66">
+              <input type="text" name="contact" id="contact" lay-verify="contact" value="" placeholder="指定联系人姓名" autocomplete="off" class="layui-input">
+          </div>
+      </div>
+      
+      <div class="layui-form-item">
+          <label class="layui-form-label"><span>*</span> 验证手机号</label>
+          <div>
+              <input type="text" name="contactTel" id="contactTel" lay-verify="contactTel" value="" placeholder="目前仅支持广东省内注册的手机号码" autocomplete="off" class="layui-input">
+          </div>
+      </div>
+
+      <div class="layui-form-item">
+           <label class="layui-form-label"><span>*</span> 手机短信验证码</label>
+           <div  class="w66">
+               <input type="text" name="smsCode" id="smsCode" lay-verify="smsCode" value="" placeholder="4位验证码" maxlength="4" autocomplete="off" class="layui-input">
+           </div>
+           <button id="sendCodeBtn" class="getNum">点击获取</button>
+       </div>
+       
+   </div>       
+       <div class="layui-form-item">
+           <div style="text-align: center">
+               <button style="background:#54c821;width:150px;margin:20px 0" type="submit" class="layui-btn" lay-submit="" lay-filter="submit">提交</button> 
+           </div>
+       </div>
+  
+	   
+   </form> 
+   </div>
+   <script src="area.js"></script>
+   <script>   
+    //var api='http://192.168.11.42:8811'
+    var api=''
+     
+   function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+        return currentdate;
+    }
+  
+       
+
+     /**
+         * 发送短信验证码 按钮时间
+         */
+        var timer = 60;
+        var sendCodeBtnText = $("#sendCodeBtn").text();
+        //console.log(sendCodeBtnText)
+        var interval;
+        $("#sendCodeBtn").click(
+            function () {
+                var that = this;
+                var mobile = $("#contactTel").val();
+                if (!mobile || !(/^1[3456789]\d{9}$/.test(mobile))) {
+                    layer.msg('请输入正确手机号码。', {icon: 2});
+                    return false;
+                }
+
+                $(that).attr('disabled', true);
+                $(that).addClass("layui-btn-disabled");
+
+                $.ajax({
+                    //请求方式
+                    type: "POST",
+                    //请求的媒体类型
+                    //contentType: "application/json;charset=UTF-8",
+                    //请求地址
+                    url: "/anon/sms/sendVerifyCode",
+                    data: {"mobile": mobile},
+                    //数据，json字符串
+                    //请求成功
+                    success: function (res) {
+                        if (res.code === 200) {
+                            layer.msg(res.msg, {icon: 1});
+                            timer = 60;
+                        } else {
+                            layer.msg(res.msg, {icon: 2});
+                            timer = 10;
+                        }
+
+                        let time = timer;
+                        //发送短信
+                        interval = setInterval(function () {
+                            time--;
+                            if (time <= 0) {
+                                clearInterval(interval);//停止任务
+                                $("#sendCodeBtn").text(sendCodeBtnText);
+                                $(that).removeClass("layui-btn-disabled");
+                                $(that).attr('disabled', false);
+                            } else {
+                                $("#sendCodeBtn").text(time + "秒后重试");
+                            }
+                        }, 1000);
+                    },
+                    //请求失败，包含具体的错误信息
+                    error: function (e) {
+                        $("#sendCodeBtn").text(sendCodeBtnText);
+                        $(that).removeClass("layui-btn-disabled");
+                        $(that).attr('disabled', false);
+                        console.log(e.status);
+                        console.log(e.responseText);
+                    }
+                });
+
+                return false;
+            }
+        );
+ 
+    layui.use(['form', 'table', 'laydate'],function () {
+        var form = layui.form
+        var table = layui.table;
+        //日期 
+        var laydate = layui.laydate; 
+        laydate.render({
+          elem: '#resumeDate',
+          trigger: 'click'
+        });  
+        var nowData=getNowFormatDate()
+		
+		$("#cCode").on("input",function(e){
+		  //获取input输入的值
+		  //console.log(e.delegateTarget.value.length);
+		  var value=e.delegateTarget.value
+		  if(value.length==18){
+		        setCname(value) 
+		  }
+		  if(value.length!=18){ 
+		      $("#cName").val('')
+			  $("#allForm").hide()
+		  }
+		}); 
+		
+		function setCname(val){ 
+		      $.ajax({
+		        //请求方式
+		        type : "POST",
+		        //请求的媒体类型
+		        //contentType: "application/json;charset=UTF-8",
+		        //请求地址
+		        url : api + "/api/open/dsuppliesapply/getcompanyexist",
+				data : {cCode:val},
+		        //数据，json字符串
+		        //请求成功
+		        success : function(result) { 
+		             if(result.code==200){
+		               $("#cName").val(result.data) 
+					   $("#allForm").show()
+		             }else{
+                         $("#cName").val("");
+                         layer.msg(result.msg) 
+					     $("#allForm").hide()
+		             }  
+		        },
+		        //请求失败，包含具体的错误信息
+		        error : function(e){
+		            console.log(e.status);
+		            console.log(e.responseText);
+		        }
+		      });
+		      
+		}
+        
+        //监听提交
+        form.on('submit(submit)', function(data){
+        
+          // layer.alert(JSON.stringify(data.field), {
+          //   title: '最终的提交信息'
+          // })
+          var formdata=data.field 
+          var submitData={}
+          submitData.cName=formdata.cName  //企业名称
+          submitData.cCode=formdata.cCode  //企业信用代码
+          submitData.cType=formdata.cType  //企业类型
+          submitData.upass=formdata.upass  //密码 
+          submitData.deptId=formdata.deptId  //镇街ID
+          submitData.address=formdata.address  //企业地址
+          submitData.contact=formdata.contact  //申购联系人
+          submitData.contactTel=formdata.contactTel  //验证手机号
+          submitData.beforePersonnel=formdata.beforePersonnel  //企业节前员工总人数
+          submitData.resumeDate=formdata.resumeDate  //复工时间
+          submitData.resumeCount=formdata.resumeCount  //目前复工人数
+          submitData.resumeMasks=formdata.resumeMasks  //申购口罩个数
+          submitData.remark=formdata.remark  //备注
+          submitData.smsCode=formdata.smsCode  // 短信验证码
+
+          console.log(submitData)
+           
+          submitData=JSON.stringify(submitData) 
+          var formData = new FormData(); 
+          formData.append('data',submitData);    
+           $.ajax({
+                      type:"POST",                             //请求的类型
+                      url:  "/api/open/dsuppliesapply/first_save",                  //请求的路径
+                      data: formData,                    //请求的参数
+                      async: false,
+                      cache: false,
+                      headers: { 
+                         "X-Requested-With": "XMLHttpRequest"
+                      },
+                      contentType: false,
+                      processData: false, 
+                      success: function (result) {                 //成功返回触发的方法 
+                          // if(result.code==200){
+                          //   layer.msg("提交成功") 
+                          // }
+
+                          if(result.code==200){
+                              location = 'success';
+                          }else {
+                              layer.alert(result.msg);
+                          }
+                          
+                      },
+                      //请求失败触发的方法
+                      error:function(XMLHttpRequest, textStatus, errorThrown){
+                          console.log("ajax请求失败");
+                          console.log("请求对象XMLHttpRequest: "+XMLHttpRequest);
+                          console.log("错误类型textStatus: "+textStatus);
+                          console.log("异常对象errorThrown: "+errorThrown);
+                      }
+          })
+          return false;
+        });
+        
+  
+        //获取镇街 
+        $.ajax({
+                //请求方式
+                type : "POST",
+                //请求的媒体类型
+                contentType: "application/json;charset=UTF-8",
+                //请求地址
+                url : api+"/api/open/keyvalue/town",
+                //数据，json字符串
+                //请求成功
+                success : function(result) { 
+                     if(result.code==200){
+                       var vdata=result.data;
+                       var tpl='<option id="none" value="">请选择企业所属镇街</option>';
+                       var firstId="";
+                       vdata.forEach(function(_item,index){   
+                           tpl += '<option value="'+_item.id+'">'+_item.deptName+'</option>';  
+                         
+                       }) 
+
+                       $("#deptId").html(tpl) 
+                       form.render('select');  
+                       //setvillage(firstId)
+                       //$('#hometown').siblings("div.layui-form-select").find('dl dd[lay-value=南山镇]').click()
+                     }else{
+                       layer.msg(result.msg) 
+                     } 
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+        });
+ 
+
+        //自定义验证规则
+        form.verify({
+          cCode: function(value){
+            if(value ==''){
+              return '请填写企业统一信用代码';
+            }
+          },
+          cName: function(value){
+            if(value ==''){
+              return '请填写正确的企业统一信用代码获取企业名称';
+            }
+          },
+          upass: function(value){
+            //console.log($('#upass2').val()) 
+            if(value ==''){
+              return '请填写登录密码';
+            }
+            if(!value.match(/^(?![^a-zA-Z]+$)(?!\D+$).{8,30}$/)){ 
+                return '请填写字母+数字构成，8位或以上的登录密码';   
+            }  
+            if(value != $('#upass2').val()){ 
+                return '两次输入的密码不一致';   
+            }   
+
+          },
+          upass2: function(value){
+            if(value ==''){
+              return '请确认密码';
+            }
+          },
+          contact: function(value){
+            if(value ==''){
+              return '请填写申购联系人';
+            } 
+          },
+          contactTel: function(value){
+            if(value ==''){
+              return '请填写验证手机号';
+            } 
+            if(!(/^1[3456789]\d{9}$/.test(value))){
+              return '请填写正确的手机号';
+            }  
+          },
+          deptId: function(value){
+            if(value.length==0){
+              return '请选择企业所属镇街';
+            }
+          },  
+          address: function(value){
+            if(value ==''){
+              return '请填写企业地址';
+            }
+          },
+          cType: function(value){ 
+            if(value.length==0){
+              return '请选择企业类型';
+            }
+          },
+          beforePersonnel: function(value){
+            if(value ==''){
+              return '请填写企业节前员工总人数';
+            }
+            if (!/^\d+$/.test(value)) {
+              return '请填写正确的节前员工总人数'    
+            };
+          },
+          resumeCount: function(value){
+            if(value ==''){
+              return '请填写复工人数';
+            }
+            if (!/^\d+$/.test(value)) {
+              return '请填写正确的复工人数'    
+            };
+          },
+          resumeMasks: function(value){
+            if(value ==''){
+              return '请填写申购口罩数量';
+            }
+            if (!/^\d+$/.test(value)) {
+              return '请填写正确的申购口罩数量'    
+            };
+          },
+          resumeDate: function(value){
+            //var isshow=$("#isreach").hasClass("show") 
+            if(value==""){
+               return "请填写复工时间" 
+            }  
+          },
+          smsCode: function(value){
+            //var isshow=$("#isreach").hasClass("show") 
+            if(value==""){
+               return "请填写手机短信验证码" 
+            }  
+          }  
+          
+        });
+    })
+ 
+</script> 
+</body>
+
+</html>

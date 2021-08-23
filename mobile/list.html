@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chorme=1">
+    <title>三水区企业口罩申购系统</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+
+    <link rel="stylesheet" href="../assets/mobile/layui/css/layui.css">
+    <link rel="stylesheet" href="../assets/mobile/layui/css/layui.mobile.css">
+    <!--顺便引入jquery在线文件-->
+    <script src="../assets/mobile/jquery.min.js"></script>
+    <script src="../assets/mobile/layui/layui.js"></script>
+
+    <style>
+        /* reset */
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        p,
+        dl,
+        dd,
+        ul,
+        ol,
+        form,
+        input,
+        textarea,
+        th,
+        td,
+        select {
+            margin: 0;
+            padding: 0;
+        }
+
+        em {
+            font-style: normal;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a:focus {
+            outline: none;
+        }
+
+        img {
+            border: none;
+            vertical-align: top;
+            max-width: 100%;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        input,
+        textarea {
+            outline: none;
+            background: none;
+            border: none;
+        }
+
+        textarea {
+            resize: none;
+            overflow: auto;
+        }
+
+        body {
+            padding: 0 15px;
+            padding-top: 36%;
+            padding-bottom: 10px;
+            background: url('../assets/mobile/suppliesapply/bg.jpg') center top no-repeat #fff;
+            background-size: 100% auto;
+            font-size: 14px;
+            font-family: "微软雅黑";
+            position: relative;
+            -webkit-text-size-adjust: none;
+            box-sizing: border-box;
+        }
+
+        /* end reset */
+
+        .clear {
+            zoom: 1;
+        }
+
+        .clear:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .fl {
+            float: left;
+            _display: inline;
+        }
+
+        .fr {
+            float: right;
+            _display: inline;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .clearfix:before,
+        .clearfix:after {
+            content: '\0020';
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .main-box {
+            position: relative;
+            max-width: 1200px;
+            width: 100%;
+            margin: auto;
+            *zoom: 1;
+            padding: 0 15px;
+            box-sizing: border-box;
+            background-color: #fff;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .history h3 {
+            height: 46px;
+            background-color: #277af3;
+            line-height: 46px;
+            padding: 0 10px;
+            color: #fff;
+        }
+
+        .history li {
+            margin: 15px 0;
+        }
+
+        .history h3 button {
+            margin-top: 8px;
+            cursor: pointer;
+        }
+
+        .history dl {
+            padding: 10px;
+            background-color: #f3f3f3;
+            line-height: 28px;
+        }
+
+        .history dl dd {
+            display: flex;
+            color: #0167f1;
+        }
+
+        .history dl dd label {
+            color: #000;
+        }
+
+        .history dl dd span {
+            flex: 1;
+        }
+
+        .btnbox {
+            margin: 15px 0;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+        .btnbox .layui-btn {
+            width: 50%;
+            background-color: #21c709;
+        }
+
+        .history dl dd.delectItem {
+            display: none;
+        }
+
+        @media screen and (min-width:780px) {
+            body {
+                width: 780px;
+                margin: auto;
+                background-size: 780px auto;
+                padding-top: 276px;
+            }
+
+            /* #isreach.show{display: block}*/
+        }
+
+        .layui-icon {
+            color: white;
+            font-size: 12px;
+        }
+
+        .message-container {
+            margin-bottom: 20px;
+
+        }
+
+        .layui-tab-title {
+            display: flex;
+            justify-content: center;
+        }
+
+        .layui-tab-title li {
+            width: 35%;
+            color: gray;
+        }
+
+        .layui-tab-brief>.layui-tab-title .layui-this {
+            color: rgb(33, 98, 182);
+        }
+
+        .layui-tab-brief>.layui-tab-more li.layui-this:after,
+        .layui-tab-brief>.layui-tab-title .layui-this:after {
+            border-bottom: 2px solid rgb(33, 98, 182)
+        }
+
+        .layui-row.container-head {
+            background-color: rgb(51, 123, 244);
+            font-size: 13px;
+            line-height: 40px;
+            color: rgb(235, 253, 255);
+            /* margin-bottom: 20px; */
+        }
+
+        .tag {
+            display: inline-block;
+            color: rgb(51, 123, 244);
+            height: 16px;
+            line-height: 16px;
+            padding: 0 3%;
+        }
+
+        .head p {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .main {
+            background-color: rgb(248, 248, 248);
+            padding-top: 20px;
+            padding-bottom: 10px;
+
+        }
+
+        .main p {
+            font-size: 14px;
+        }
+
+        .main-head {
+            /* margin-top: 20px; */
+        }
+
+        .main-info {
+            margin-bottom: 10px;
+        }
+
+        .attribute {
+            color: black;
+            display: inline-block;
+            float: right;
+        }
+
+        .value {
+            color: rgb(51, 123, 244);
+        }
+
+        .layui-col-xs8 {
+            margin-left: 10px;
+        }
+
+        .sourceStatus {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body class="index">
+    <i class="layui-icon layui-icon-location">&nbsp大旗头村</i>
+    <div class="main-box">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">未核人员</li>
+                <li>已核人员</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <div class="message-container">
+                        <div class="layui-row container-head">
+                            <div class="layui-col-xs4 head">
+                                <p>序号:&nbsp001</p>
+                            </div>
+                            <div class="layui-col-xs7 sourceStatus">线索状态:&nbsp
+                                <div class="layui-card tag">重复人员</div>
+                            </div>
+                        </div>
+                        <div class="layui-row container-main">
+                            <div class="layui-card main">
+                                <div class="layui-row main-info main-head">
+                                    <div class="layui-col-xs4">
+                                        <p class="attribute">姓名&nbsp:&nbsp</p>
+                                    </div>
+                                    <div class="layui-col-xs7">
+                                        <p class="value">李长军</p>
+                                    </div>
+                                </div>
+                                <div class="layui-row main-info">
+                                    <div class="layui-col-xs4">
+                                        <p class="attribute">联系电话&nbsp:&nbsp</p>
+                                    </div>
+                                    <div class="layui-col-xs7">
+                                        <p class="value">13105278844</p>
+                                    </div>
+                                </div>
+                                <div class="layui-row main-info">
+                                    <div class="layui-col-xs4">
+                                        <p class="attribute">现时住址&nbsp:&nbsp</p>
+                                    </div>
+                                    <div class="layui-col-xs7">
+                                        <p class="value">西南街道河口左田公寓4楼315房间</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="message-container">
+                        <div class="layui-row container-head">
+                            <div class="layui-col-xs4 head">
+                                <p>序号:&nbsp001</p>
+                            </div>
+                            <div class="layui-col-xs7 sourceStatus">线索状态:&nbsp
+                                <div class="layui-card tag">重复人员</div>
+                            </div>
+                        </div>
+                        <div class="layui-row container-main">
+                            <div class="layui-card main">
+                                <div class="layui-row main-info main-head">
+                                    <div class="layui-col-xs4">
+                                        <p class="attribute">姓名&nbsp:&nbsp</p>
+                                    </div>
+                                    <div class="layui-col-xs7">
+                                        <p class="value">李长军</p>
+                                    </div>
+                                </div>
+                                <div class="layui-row main-info">
+                                    <div class="layui-col-xs4">
+                                        <p class="attribute">联系电话&nbsp:&nbsp</p>
+                                    </div>
+                                    <div class="layui-col-xs7">
+                                        <p class="value">13105278844</p>
+                                    </div>
+                                </div>
+                                <div class="layui-row main-info">
+                                    <div class="layui-col-xs4">
+                                        <p class="attribute">现时住址&nbsp:&nbsp</p>
+                                    </div>
+                                    <div class="layui-col-xs7">
+                                        <p class="value">西南街道河口左田公寓4楼315房间</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="layui-tab-item">内容2</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        layui.use('element', function () {
+            var element = layui.element;
+
+            //…
+        });
+        layui.use(['form'], function () {
+            var form = layui.form;
+
+            //var api='http://192.168.11.42:8811';
+            var api = '';
+            var acceToken = getCookie('acceToken');
+
+            $('#goToList').click(function () {
+                location = '/api/dsuppliesapply/again';
+            });
+
+            $.ajax({
+                type: "POST",
+                url: api + "/api/dsuppliesapply/list",
+                data: { "access_token": acceToken },
+                success: function (result) {
+                    if (result.code == 200) {
+                        var data = result.data;
+                        for (var i = 0; i < data.length; i++) {
+                            var status = data[i].status;
+                            var statusBtn = '';
+                            var listr = '';
+                            if (status == 1) {
+                                listr = '<li>' +
+                                    '<h3>记录' + (i + 1) + '<button type="button" class="delect layui-btn layui-btn-sm layui-btn-danger fr" data-rcodeId="' + data[i].id + '">撤销申购</button>' + '</h3>' +
+                                    '<dl>' +
+                                    '<dd class="normalItem"><label>状态：</label><span>' + data[i].statusCN + '</span></dd>' +
+                                    '<dd class="normalItem"><label>申购数量：</label><span>' + data[i].resumeMasks + '</span></dd>' +
+                                    '<dd class="normalItem"><label>申购时间：</label><span>' + data[i].sysCreatedate + '</span></dd>' +
+                                    '<dd class="delectItem"><label>申购时间：</label><span>' + data[i].sysCreatedate + '</span></dd>' +
+                                    '<dd class="delectItem"><label>状态：</label><span>' + data[i].statusCN + '</span></dd>' +
+                                    '</dl>' +
+                                    '</li>';
+                            } else if (status == 2) {
+                                listr = '<li>' +
+                                    '<h3>记录' + (i + 1) + '</h3>' +
+                                    '<dl>' +
+                                    '<dd><label>状态：</label><span>' + data[i].statusCN + '</span></dd>' +
+                                    '<dd><label>申购时间：</label><span>' + data[i].sysCreatedate + '</span></dd>' +
+                                    //    '<dd><label>口罩单价：</label><span>' + data[i].maskPrice + '</span></dd>' +
+                                    //   '<dd><label>预计发放数：</label><span>' + data[i].issueCount + '个</span></dd>' +
+                                    //    '<dd><label>待发放反馈意见：</label><span>' + data[i].passOpinion + '</span></dd>' +
+                                    '</dl>' +
+                                    '</li>';
+                            } else if (status == 3) {
+                                var button = judgeTime(data[i].sysCreatedate) < 4 ? '<button type="button" class="delect layui-btn layui-btn-sm layui-btn-danger fr" data-rcodeId="' + data[i].id + '">撤销申购</button>' : '';
+                                listr = '<li>' +
+                                    '<h3>记录' + (i + 1) + button + '</h3>' +
+                                    '<dl>' +
+                                    '<dd><label>状态：</label><span>' + data[i].statusCN + '</span></dd>' +
+                                    '<dd><label>申购时间：</label><span>' + data[i].sysCreatedate + '</span></dd>' +
+                                    //    '<dd><label>口罩单价：</label><span>' + data[i].maskPrice + '个</span></dd>' +
+                                    //    '<dd><label>实际发放数：</label><span>' + data[i].actualCount + '个</span></dd>' +
+                                    //    '<dd class="delectItem"><label>实际发放时间：</label><span>' + data[i].actualDate + '</span></dd>' +
+                                    //    '<dd><label>已完成反馈意见：</label><span>' + data[i].finishOpinion + '</span></dd>' +
+                                    '</dl>' +
+                                    '</li>';
+                            } else if (status == 0) {
+                                listr = '<li>' +
+                                    '<h3>记录' + (i + 1) + '</h3>' +
+                                    '<dl>' +
+                                    '<dd><label>状态：</label><span>' + data[i].statusCN + '</span></dd>' +
+                                    '<dd><label>申购数量：</label><span>' + data[i].resumeMasks + '</span></dd>' +
+                                    '<dd><label>申购时间：</label><span>' + data[i].sysCreatedate + '</span></dd>' +
+                                    //    '<dd><label>无效反馈意见：</label><span>' + data[i].refuseOpinion + '</span></dd>' +
+                                    '</dl>' +
+                                    '</li>';
+                            } else if (status == -1) {
+                                listr = '<li>' +
+                                    '<h3>记录' + (i + 1) + '</h3>' +
+                                    '<dl>' +
+                                    '<dd><label>状态：</label><span>' + data[i].statusCN + '</span></dd>' +
+                                    '<dd><label>申购数量：</label><span>' + data[i].resumeMasks + '</span></dd>' +
+                                    '<dd><label>申购时间：</label><span>' + data[i].sysCreatedate + '</span></dd>' +
+                                    '</dl>' +
+                                    '</li>';
+                            }
+                            $('.history').append(listr);
+                        }
+                    } else {
+                        layer.alert(result.msg);
+                    }
+
+                },
+                //请求失败触发的方法
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("ajax请求失败");
+                    console.log("请求对象XMLHttpRequest: " + XMLHttpRequest);
+                    console.log("错误类型textStatus: " + textStatus);
+                    console.log("异常对象errorThrown: " + errorThrown);
+                }
+            })
+
+            $(document).on('click', '.delect', function () {
+                var id = $(this).data('rcodeid');
+                var _this = $(this);
+                layer.confirm('确定撤销吗？', function (index) {
+                    $.ajax({
+                        type: "POST",
+                        url: api + "/api/dsuppliesapply/cancel",
+                        data: {
+                            "access_token": acceToken,
+                            "id": id
+                        },
+                        success: function (result) {
+                            layer.close(index);
+                            if (result.code == 200) {
+                                // _this.find('.noramlItem').hide();
+                                // _this.find('.delectItem').show();
+                                location.reload();
+                            } else {
+                                layer.alert(result.msg);
+                            }
+                        },
+                        //请求失败触发的方法
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            console.log("ajax请求失败");
+                            console.log("请求对象XMLHttpRequest: " + XMLHttpRequest);
+                            console.log("错误类型textStatus: " + textStatus);
+                            console.log("异常对象errorThrown: " + errorThrown);
+                        }
+                    })
+                });
+            })
+
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') c = c.substring(1);
+                    if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+                }
+                return "";
+            }
+
+            //    计算日期差
+            function judgeTime(data) {
+                s1 = new Date(data.replace(/-/g, "/").replace("T", " "));
+                s2 = new Date();
+                var days = s2.getTime() - s1.getTime();
+                var time = parseInt(days / (1000 * 60 * 60 * 24));
+                return time;
+            }
+        });
+    </script>
+</body>
+
+</html>

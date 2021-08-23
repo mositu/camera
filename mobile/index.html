@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chorme=1">
+    <title>三水区企业口罩申购系统</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+
+    <link rel="stylesheet" href="../assets/mobile/layui/css/layui.css">
+    <link rel="stylesheet" href="../assets/mobile/layui/css/layui.mobile.css">
+    <!--顺便引入jquery在线文件-->
+    <script src="../assets/mobile/jquery.min.js"></script>
+    <script src="../assets/mobile/layui/layui.js"></script>
+ 
+<style>
+    /* reset */
+html,body,h1,h2,h3,h4,h5,p,dl,dd,ul,ol,form,input,textarea,th,td,select { margin:0; padding:0; }
+em { font-style:normal; }
+li { list-style:none; }
+a { text-decoration:none; color: inherit;}
+a:focus { outline: none; } 
+img { border:none; vertical-align:top; max-width: 100%; }
+table { border-collapse:collapse; }
+input,textarea { outline:none; background: none; border: none; }
+textarea { resize:none; overflow:auto; }
+body { padding:0 15px; padding-top: 36%; padding-bottom: 10px; background: url('../assets/mobile/suppliesapply/bg.jpg') center top no-repeat #fff; background-size: 100% auto; font-size:14px; font-family:"微软雅黑"; position: relative;  -webkit-text-size-adjust: none; box-sizing: border-box;}
+/* end reset */
+
+.clear { zoom:1; }
+.clear:after { content:''; display:block; clear:both; }
+.fl { float:left; _display: inline;}
+.fr { float:right; _display: inline;}
+.clearfix {*zoom: 1;}
+.clearfix:before, .clearfix:after {content: '\0020';display: block;height: 0;clear: both;visibility: hidden;}
+
+.main-box {position: relative;max-width: 1200px; width: 100%; margin: auto; *zoom: 1; padding: 0 15px; box-sizing: border-box; background-color: #fff; border-radius: 10px 10px 0 0;}
+.title{
+font-size: 20px;
+line-height: 32px;
+font-weight: bold;
+margin: 0;
+padding: 0;
+text-align: center;
+padding:10px 0;
+}
+html,body{
+  height: 100%;
+  overflow: hidden;
+}
+.agreement p{
+  line-height: 24px;
+  text-indent: 2em;
+}
+.agreement span{
+  color: #ff0000;
+}
+.agreement .block{
+  padding: 20px 0;
+  border-bottom: 1px dashed #ccc;
+}
+.agreement .blocktit strong{
+  display: inline-block;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.agreement .blocktit1 strong{
+  background: url('../assets/mobile/suppliesapply/arrow2.png') left center no-repeat;
+  background-size: auto 60%;
+  color: #df400f;
+}
+.agreement .blocktit2 strong{
+  background: url('../assets/mobile/suppliesapply/arrow1.png') left center no-repeat;
+  background-size: auto 60%;
+  color: #0764f8;
+}
+.agreement .blocktit3 strong{
+  background: url('../assets/mobile/suppliesapply/arrow3.png') left center no-repeat;
+  background-size: auto 60%;
+  color: #30b012;
+}
+.fullpage{
+  height: 100%;
+  overflow: hidden;
+}
+.flexbox{
+  display: flex;
+  flex-direction: column;
+}
+.flexitem{
+  flex: auto;
+}
+.check{
+  margin-top: 15px;
+  text-align: center;
+}
+.btnbox{
+  margin: 15px 0;
+}
+.btnbox button{
+  width: 47%;
+}
+.layui-form-checkbox[lay-skin=primary] i{
+  border: 1px solid #e21313;
+}
+.layui-form-checkbox[lay-skin=primary]:hover i {
+    border-color: #e21313;
+}
+.layui-form-checked[lay-skin=primary] i {
+    border-color: #e00c35!important;
+    background-color: #e00c35;
+}
+.layui-form-checkbox[lay-skin=primary] span {
+    color: #e21313;
+}
+.layui-btn.fl {
+    background-color: #21c709;
+}
+@media screen and (min-width:780px) {
+  body{width:780px;margin:auto;background-size: 780px auto;padding-top:276px;} 
+  /* #isreach.show{display: block}*/
+}
+</style>
+</head>
+<body class="index">
+   <div class="fullpage main-box">
+      <form class="layui-form fullpage">
+     <div class="fullpage flexbox">
+       <h2 class="title">关于三水区企业<br>网上口罩申购系统的说明</h2>
+       <div class="agreement flexitem" style="overflow: auto;">
+         <div>
+            <p>为落实市委、市政府关于企业复工复产的相关部署，有效解决企业复工复产中存在口罩紧缺的突出问题，三水区新冠肺炎防控指挥部办公室提供口罩申购线上服务。相关事宜说明如下：</p>
+            <div class="block">
+                <p class="blocktit1 blocktit"><strong>鼓励自筹解决</strong></p>
+                <p>自新冠肺炎疫情发生以来，辖区内企业积极参与疫情防控，出钱出力支持疫情防控，履行社会责任，彰显企业担当，为打好疫情防控阻击战作出了重要贡献。希望广大企业继续发扬敢于担当、服务社会的企业家精神，千方百计多渠道自筹解决口罩紧缺问题，政企同心共克时艰。</p>
+            </div>
+            <div class="block">
+                <p class="blocktit2 blocktit"><strong>网上预约申购</strong></p>
+                <p>凡在三水区内进行工商登记注册、依法纳税的企业（不含个体工商户），如确实不能解决复工复产面临的口罩问题，缺口部分，可按照实际需求进行网上预约申购。<span>每家企业再次申购需间隔7天以上</span>，申购价格按政府采购价格执行（<span>口罩不同批次价格因市场波动会有变化</span>）。申购流程：</p>
+                <p>①首次申购，进入页面如实填报企业核心信息和申购需求，并设置登录密码，点击提交。</p>
+                <p>②非首次申购，进入页面输入企业统一社会信用代码，输入密码登录后，填写申购需求，点击提交。</p>
+                <p>③结果查询，进入页面输入企业统一社会信用代码，输入密码登录后可查看。成功申购的数量和价格，见系统推送的信息通知。</p>
+            </div>
+            <div class="block" style="border-bottom:0">
+                <p class="blocktit3 blocktit"><strong>联系人及电话</strong></p>
+                <p><strong>（一）各镇（街）服务联系人及电话。</strong></p>
+                <p>西南街道经促局：87618986、87618997</p>
+                <p>联系人：陈昭彦，手机号码:13928569080</p>
+                <p>云东海街道经促局：66897068、66897084</p>
+                <p>联系人：邓东晓，手机号码：13702757557</p>
+                <p>白坭镇经促局：87563016、87563093</p>
+                <p>联系人：‭陆坚泰，手机号码：18038760003‬</p>
+                <p>乐平镇经促局：87380996、87380388</p>
+                <p>联系人：曾桂红，手机号码：17796062668</p>
+                <p>芦苞镇经促局：87232202、87239668</p>
+                <p>联系人：刘  童，手机号码：13590516369</p>
+                <p>大塘镇经促局：87290913、87290912</p>
+                <p>联系人：郑文亮，手机号码：13709603219</p>
+                <p>南山镇经促局：87210181、87219686</p>
+                <p>联系人：潘健星，手机号码：13925480023</p>
+                <p><strong>（二）区服务联系人及电话。</strong></p>
+                <p>区经科局：87755921</p>
+                <p>联系人：陆肖冰，手机号码：13709607393</p>
+                <p>口罩网上申购系统自2020年2月19日起运行。</p>
+                <p><strong>（三）系统技术支持</strong></p>
+                <p>区数据资源中心：87755803</p>
+                <p>联系人：黄  归，手机号码：18029312596</p>
+            </div>
+          </div>
+        </div>
+        <div class="check"><input type="checkbox" lay-skin="primary" title="我已经详细阅读" class="checkItem"></div>
+        <div class="btnbox">
+          <button type="button" class="layui-btn fl" link-add="first">首次申购</button>
+          <button type="button" class="layui-btn layui-btn-normal fr" link-add="/api/open/dsuppliesapply/company_login">再次申购/查询</button>
+        </div>
+      </div>
+    </form>
+   </div>
+   <script>   
+   layui.use(['form'], function(){
+    var form = layui.form;
+   });
+
+   $('.btnbox button').on('click', function(){
+     if(!$('.checkItem').is(':checked')){
+      layer.msg('请详细阅读申购说明，并确认同意协议内容！');
+     }else{
+       var link = $(this).attr('link-add');
+       if(link){
+        window.location.href = link;
+       }
+     }
+   })
+</script> 
+</body>
+
+</html>
